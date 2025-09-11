@@ -1,15 +1,47 @@
-# Network Traffic Data Cleaning & Preprocessing
+# Network Traffic Data Preprocessing
 
-This project demonstrates the cleaning and preprocessing of a network traffic dataset (e.g., CICIDS-like dataset). The dataset originally contains 79 features and one target label (`Label`) with missing values and mixed data types.
+This repository contains **corrected preprocessing steps** for the network traffic dataset.  
+An earlier version of the preprocessing notebook had mistakes — this `ipynb` is the **final, corrected version**.
 
-## Tasks Completed
-- Loaded dataset with **pandas** and handled mixed data types.
-- Converted categorical `Label` values into binary format (`BENIGN → 0`, `MALIGNANT/ATTACK → 1`).
-- Checked and filled missing values using **Central Tendency (mean/median/mode)** depending on skewness:
-  - If feature skewness < 0.5 → filled with **mean**.
-  - If feature skewness ≥ 0.5 → filled with **median**.
-  - For categorical → filled with **mode**.
-- Reset dataset index after cleaning.
-- Visualized feature distributions using **Seaborn & Matplotlib** (e.g., `distplot`, subplots).
-- Saved cleaned dataset as a new CSV file for modeling.
+---
 
+## 📌 Dataset Description
+- Total records: **20,496**
+- Features: **79**
+- Target column: **`Label`**
+  - Encoded as **0 = BENIGN** and **1 = ATTACK**
+
+---
+
+## ✅ Preprocessing Steps
+1. **Fixed column names** (removed extra spaces / duplicates like `' Label'`).
+2. **Handled missing values**:
+   - Identified columns with `NaN` (mainly `Flow Bytes/s`).
+   - Filled missing values using **median** for skewed features.
+3. **Label Encoding**:
+   - Converted `BENIGN` → **0**,  
+   - Attack types → **1**.
+4. **Exploratory Data Analysis (EDA)**:
+   - Distribution plots (`distplot`, histograms, KDE).
+   - Class imbalance check (`countplot`).
+5. **Saved cleaned dataset** to CSV for ML model building.
+
+---
+
+## 📊 Visualizations
+- Class distribution bar chart.
+- Histograms of traffic features (e.g., `Flow Duration`, `Flow Bytes/s`).
+- Correlation heatmap for feature selection.
+
+---
+
+## 📂 Files
+- `data_preprocessing_final.ipynb` → **Final preprocessing notebook**.
+- `clean_data.csv` → Preprocessed dataset (ready for ML).
+
+---
+
+
+---
+
+⚠️ **Note**: Ignore the older preprocessing notebook — it had label mis-encoding and unhandled missing values.
